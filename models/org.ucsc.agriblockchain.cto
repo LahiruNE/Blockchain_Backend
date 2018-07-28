@@ -5,13 +5,13 @@ asset Product identified by productId {
   o Plot plot
   o Certification certification 
   o ProductType productType
-  --> Stakeholder currentOwner
-  --> Stakeholder vendor
   o Double quantity
   o Unit unit
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
   --> Product parentProduct optional 
+  --> Stakeholder currentOwner
+  --> Stakeholder issuer 
 }
 
 concept Plot {
@@ -115,7 +115,7 @@ participant Retail identified by stakeholderId extends Stakeholder {
   o String branchNo
 }
 
-transaction transferPackage {
+transaction TransferPackage {
   --> Product product
   --> Stakeholder newOwner
   --> Stakeholder oldOwner 
