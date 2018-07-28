@@ -1,42 +1,125 @@
-/*
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * Write your model definitions here
- */
-
 namespace org.ucsc.agriblockchain
 
-participant SampleParticipant identified by participantId {
-  o String participantId
-  o String firstName
-  o String lastName
+asset Product identified by productId {
+  o String productId
+  o Plot plot
+  o Certification certification 
+  o ProductType productType
+  --> Stakeholder currentOwner
+  --> Stakeholder vendor
+  o Double quantity
+  o Unit unit
+  o Status status
+  --> Product[] parentProduct optional 
 }
 
-asset SampleAsset identified by assetId {
-  o String assetId
-  --> SampleParticipant owner
-  o String value
+concept Plot {
+  o String y
 }
 
-transaction SampleTransaction {
-  --> SampleAsset asset
-  o String newValue
+concept Address {
+  o String postalCode optional 
+  o String no optional
+  o String street optional
+  o String city  
+  o String country
 }
 
-event SampleEvent {
-  --> SampleAsset asset
-  o String oldValue
-  o String newValue
+concept Company {
+  o String name
+  o Address address
+  o String telephone optional 
+}
+
+concept Certification {
+  o String certificationNo
+  o String certificationBody
+  o DateTime from
+  o DateTime to
+  o String[] images
+}
+
+enum ProductType {
+  o CARROT
+  o TOMATO
+  o PINEAPPLE
+}
+
+enum DistType {
+  o F2P
+  o P2W
+  o W2R
+}
+
+enum Unit {
+  o KG
+  o G
+  o MT
+  o L
+  o ML
+  o ITEM
+}
+
+enum Status {
+  o ORIGINAL
+  o DIVIDED
+  o MERGED
+}
+
+abstract participant Stakeholder {
+  o String name
+  o Address address
+  o String email optional 
+  o String telephone optional
+  o Certification certification optional 
+  o String[] images optional
+  o Company company     
+}
+
+participant Farmer identified by stakeholderId extends Stakeholder {
+  o String stakeholderId
+  o String description optional  
+  o String[] farms
+}
+
+participant Distribution identified by stakeholderId extends Stakeholder {
+  o String stakeholderId
+  o String description optional 
+  o String authPerson 
+  o String vehicleNo optional
+  o DistType type
+}
+
+participant Packaging identified by stakeholderId extends Stakeholder {
+  o String stakeholderId
+  o String description optional 
+  o String authPerson 
+}
+
+participant Warehouse identified by stakeholderId extends Stakeholder {
+  o String stakeholderId
+  o String description optional 
+  o String authPerson 
+}
+
+participant Retail identified by stakeholderId extends Stakeholder {
+  o String stakeholderId
+  o String description optional 
+  o String authPerson 
+  o String branchNo
+}
+
+transaction transferPackage {
+  --> Product product
+  --> Stakeholder newOwner
+  --> Stakeholder oldOwner 
+}
+
+transaction divideAsset {
+  --> Product product
+  o String[] divideQty
+}
+
+transaction mergeAsset {
+  --> Product[] product
 }
