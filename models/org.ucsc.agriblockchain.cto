@@ -9,8 +9,9 @@ asset Product identified by productId {
   --> Stakeholder vendor
   o Double quantity
   o Unit unit
-  o Status status
-  --> Product[] parentProduct optional 
+  o DivideStatus divideStatus
+  o ActiveStatus activeStatus
+  --> Product parentProduct optional 
 }
 
 concept Plot {
@@ -60,10 +61,15 @@ enum Unit {
   o ITEM
 }
 
-enum Status {
+enum DivideStatus {
   o ORIGINAL
   o DIVIDED
   o MERGED
+}
+
+enum ActiveStatus {
+  o ACTIVE
+  o CLOSED
 }
 
 abstract participant Stakeholder {
@@ -117,7 +123,7 @@ transaction transferPackage {
 
 transaction divideAsset {
   --> Product product
-  o String[] divideQty
+  o Double[] divideQty
 }
 
 transaction mergeAsset {
