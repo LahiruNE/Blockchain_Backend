@@ -27,7 +27,7 @@ rule EverybodyCanSubmitTransactions {
     description: "Allow all participants to submit transactions"
     participant: "org.ucsc.agriblockchain.Stakeholder"
     operation: CREATE
-    resource: "org.ucsc.agriblockchain.divideAsset"
+    resource: "org.ucsc.agriblockchain.DivideAsset"
     action: ALLOW
 }
 

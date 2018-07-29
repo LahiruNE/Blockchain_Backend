@@ -10,7 +10,7 @@ asset Product identified by productId {
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
   o Trace[] productpath
-  --> Product parentProduct optional 
+  --> Product[] parentProduct optional 
   --> Stakeholder currentOwner
   --> Stakeholder issuer 
 }
@@ -126,11 +126,11 @@ transaction TransferPackage {
   --> Stakeholder newOwner
 }
 
-transaction divideAsset {
+transaction DivideAsset {
   --> Product product
   o Double[] divideQty
 }
 
-transaction mergeAsset {
+transaction MergeAsset {
   --> Product[] product
 }
