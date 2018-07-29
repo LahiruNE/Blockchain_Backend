@@ -9,7 +9,7 @@ asset Product identified by productId {
   o Unit unit
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
-  o Trace[] productpath
+  o Trace[] productpath optional
   --> Product[] parentProduct optional 
   --> Stakeholder currentOwner
   --> Stakeholder issuer 
