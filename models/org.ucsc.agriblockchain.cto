@@ -118,7 +118,6 @@ participant Retail identified by stakeholderId extends Stakeholder {
 transaction TransferPackage {
   --> Product product
   --> Stakeholder newOwner
-  --> Stakeholder oldOwner 
 }
 
 transaction divideAsset {
