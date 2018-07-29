@@ -9,9 +9,15 @@ asset Product identified by productId {
   o Unit unit
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
+  o Trace[] productpath
   --> Product parentProduct optional 
   --> Stakeholder currentOwner
   --> Stakeholder issuer 
+}
+
+concept Trace {
+  o DateTime timestamp
+  --> Stakeholder authperson
 }
 
 concept Plot {
