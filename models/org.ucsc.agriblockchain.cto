@@ -2,26 +2,27 @@ namespace org.ucsc.agriblockchain
 
 asset Product identified by productId {
   o String productId
-  o Plot plot
   o Certification certification 
   o ProductType productType
   o Double quantity
   o Unit unit
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
-  o Trace[] productpath optional
-  --> Product[] parentProduct optional 
+  o Trace[] productpath
+  --> Plot plot 
+  --> Product parentProduct optional 
   --> Stakeholder currentOwner
   --> Stakeholder issuer 
 }
 
+asset Plot identified by plotId {
+  o String plotId
+  o PHReading[] phReadings  
+ }
+
 concept Trace {
   o DateTime timestamp
   --> Stakeholder authperson
-}
-
-concept Plot {
-  o String y
 }
 
 concept Address {
@@ -133,4 +134,16 @@ transaction DivideAsset {
 
 transaction MergeAsset {
   --> Product[] product
+}
+transaction PHReading {
+  --> Plot plot
+  o Double ph
+  o DateTime readingTime
+}
+
+event PHThresholdEvent {
+  --> Plot plot
+  o String message
+  o Double phvalue
+  o DateTime readingTime
 }
