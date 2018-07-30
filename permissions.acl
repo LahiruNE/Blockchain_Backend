@@ -63,3 +63,12 @@ rule NetworkAdminSystem {
     resource: "org.hyperledger.composer.system.**"
     action: ALLOW
 }
+rule historianAccess{
+  description: "Only allow members to read historian records referencing transactions they submitted."
+  participant(p): "org.ucsc.agriblockchain.Stakeholder"
+  operation: READ
+  resource(r): "org.hyperledger.composer.system.HistorianRecord"
+  condition: (r.participantInvoking.getIdentifier() == p.getIdentifier())
+  action: ALLOW
+
+}

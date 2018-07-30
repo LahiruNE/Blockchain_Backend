@@ -1,0 +1,6 @@
+query selectProductsByProductType{
+description:"Product Type"
+statement:
+        SELECT org.ucsc.agriblockchain.Product
+          WHERE  (productType == _$productType) 
+}
