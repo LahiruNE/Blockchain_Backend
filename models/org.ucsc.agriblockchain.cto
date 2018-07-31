@@ -2,6 +2,7 @@ namespace org.ucsc.agriblockchain
 
 asset Product identified by productId {
   o String productId
+  o DateTime pluckedDate
   o Certification certification 
   o ProductType productType
   o Double quantity
@@ -17,8 +18,40 @@ asset Product identified by productId {
 
 asset Plot identified by plotId {
   o String plotId
+  o String cultivationStartDate
+  o Double extent
+  o CloserPlots closerplots
   o PHReading[] phReadings  
+  o String certificationBodyComments
  }
+
+ asset Farm identified by farmId{
+   o String farmId
+   o String FarmLocation
+   o String[] images 
+   o String[] waterSources
+   o String[] nearFactories
+   o String otherDescription
+   o String certificationBodyComments
+ }
+asset seed identified by seedId{
+  o String seedId
+  o String name
+  o DateTime manufactureDate
+  o DateTime expiryDate optional
+  o DateTime dateOfSale optional
+  o Integer amount
+  o Integer price
+  o String[] activeChemicals
+
+}
+
+concept CloserPlots{
+  o String North
+  o String East
+  o String South
+  o String West
+} 
 
 concept Trace {
   o DateTime timestamp
@@ -45,6 +78,7 @@ concept Certification {
   o DateTime from
   o DateTime to
   o String[] images
+  o String comment
 }
 
 enum ProductType {
@@ -92,7 +126,7 @@ abstract participant Stakeholder {
 participant Farmer identified by stakeholderId extends Stakeholder {
   o String stakeholderId
   o String description optional  
-  o String[] farms
+  --> Farm[] farms
 }
 
 participant Distribution identified by stakeholderId extends Stakeholder {
