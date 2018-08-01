@@ -180,6 +180,7 @@ transaction PHReading {
   o DateTime readingTime
 }
 transaction Activity{
+  --> Plot plot
   o ActivityType activitytype
   o DateTime time
 }
