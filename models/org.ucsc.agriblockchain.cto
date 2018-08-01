@@ -21,6 +21,7 @@ asset Plot identified by plotId {
   o String cultivationStartDate
   o Double extent
   o CloserPlots closerplots
+  o Activity[] activities
   o PHReading[] phReadings  
   o String certificationBodyComments
  }
@@ -28,10 +29,10 @@ asset Plot identified by plotId {
  asset Farm identified by farmId{
    o String farmId
    o String FarmLocation
-   o String[] images 
+   o String[] images optional 
    o String[] waterSources
    o String[] nearFactories
-   o String otherDescription
+   o String otherDescription optional
    o String certificationBodyComments
  }
 asset seed identified by seedId{
@@ -112,7 +113,11 @@ enum ActiveStatus {
   o ACTIVE
   o CLOSED
 }
+enum ActivityType  {
+  o LANDSCAPING
+  o WATERING
 
+}
 abstract participant Stakeholder {
   o String name
   o Address address
@@ -174,7 +179,10 @@ transaction PHReading {
   o Double ph
   o DateTime readingTime
 }
-
+transaction Activity{
+  o ActivityType activitytype
+  o DateTime time
+}
 event PHThresholdEvent {
   --> Plot plot
   o String message
