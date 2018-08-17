@@ -23,6 +23,14 @@ rule EverybodyCanReadEverything {
     action: ALLOW
 }
 
+rule SampleConditionalRule {
+    description: "Description of the ACL rule"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Product"
+    action: ALLOW
+}
+
 rule EverybodyCanSubmitTransactions {
     description: "Allow all participants to submit transactions"
     participant: "org.ucsc.agriblockchain.Stakeholder"
@@ -30,6 +38,7 @@ rule EverybodyCanSubmitTransactions {
     resource: "org.ucsc.agriblockchain.DivideAsset"
     action: ALLOW
 }
+
 
 rule OwnerHasFullAccessToTheirAssets {
     description: "Allow all participants full access to their assets"
