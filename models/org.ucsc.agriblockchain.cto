@@ -23,7 +23,7 @@ asset Plot identified by plotId {
   o CloserPlots closerplots
   o Activity[] activities
   o PHReading[] phReadings  
-  o String certificationBodyComments
+  o String[] certificationBodyComments
   -->Farm farm
  }
 
@@ -34,7 +34,7 @@ asset Farm identified by farmId{
    o String[] waterSources
    o String[] nearFactories
    o String otherDescription optional
-   o String certificationBodyComments
+   o Certification certification 
  }
 
 asset Seed identified by seedId{
@@ -46,6 +46,7 @@ asset Seed identified by seedId{
   o Integer amount
   o Integer price
   o String[] activeChemicals
+  o Certification certification 
   --> SeedProvider vendor
 }
 
@@ -58,6 +59,7 @@ asset Fertilizer identified by fertilizerId{
   o Integer amount
   o Integer price
   o String[] activeChemicals
+  o Certification certification 
   --> FertilizerProvider vendor
 }
 
@@ -70,6 +72,7 @@ asset Pesticide identified by pesticideId{
   o Integer amount
   o Integer price
   o String[] activeChemicals
+  o Certification certification 
   --> PesticideProvider vendor
 }
 
@@ -101,11 +104,11 @@ concept Company {
 
 concept Certification {
   o String certificationNo
-  o String certificationBody
+  --> CertificationBody certificationBody
   o DateTime from
   o DateTime to
   o String[] images
-  o String comment
+  o String[] comment
 }
 
 enum ProductType {
@@ -201,6 +204,12 @@ participant FertilizerProvider identified by fertilizerProviderId extends Stakeh
 
 participant PesticideProvider identified by pesticideProviderId extends Stakeholder {
   o String pesticideProviderId
+  o String description optional 
+  o String authPerson
+}
+
+participant CertificationBody identified by certificationBodyId extends Stakeholder {
+  o String certificationBodyId
   o String description optional 
   o String authPerson
 }

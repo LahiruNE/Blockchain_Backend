@@ -15,18 +15,36 @@
 /**
  * Sample access control list.
  */
-rule EverybodyCanReadEverything {
+rule CertificationCanRead {
     description: "Allow all participants read access to all resources"
-    participant: "org.ucsc.agriblockchain.Stakeholder"
-    operation: READ
-    resource: "org.ucsc.agriblockchain.*"
+    participant(p): "org.ucsc.agriblockchain.CertificationBody"
+    operation: READ, UPDATE
+    resource(r): "org.ucsc.agriblockchain.*"
+    condition: (r.certification.certificationBody.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule RetailConditionalRule1 {
+    description: "Retail can do product operations"
+    participant: "org.ucsc.agriblockchain.Retail"
+    operation: CREATE
+    resource: "org.ucsc.agriblockchain.Product"
+    action: DENY
+}
+
+rule OwnerHasFullAccessToTheirAssets {
+    description: "Allow all participants full access to their assets"
+    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource(r): "org.ucsc.agriblockchain.*"
+    condition: (r.owner.getIdentifier() === p.getIdentifier())
     action: ALLOW
 }
 
 rule FarmerConditionalRule1 {
     description: "Farmer can do plot operations"
     participant: "org.ucsc.agriblockchain.Farmer"
-    operation: ALL
+    operation: CREATE
     resource: "org.ucsc.agriblockchain.Plot"
     action: ALLOW
 }
@@ -34,7 +52,7 @@ rule FarmerConditionalRule1 {
 rule FarmerConditionalRule2 {
     description: "Farmer can do product operations"
     participant: "org.ucsc.agriblockchain.Farmer"
-    operation: ALL
+    operation: CREATE
     resource: "org.ucsc.agriblockchain.Product"
     action: ALLOW
 }
@@ -42,23 +60,15 @@ rule FarmerConditionalRule2 {
 rule FarmerConditionalRule3 {
     description: "Farmer can do farm operations"
     participant: "org.ucsc.agriblockchain.Farmer"
-    operation: ALL
+    operation: CREATE
     resource: "org.ucsc.agriblockchain.Farm"
-    action: ALLOW
-}
-
-rule DistributionConditionalRule1 {
-    description: "Distribution can do product operations"
-    participant: "org.ucsc.agriblockchain.Distribution"
-    operation: ALL
-    resource: "org.ucsc.agriblockchain.Product"
     action: ALLOW
 }
 
 rule PackagingConditionalRule1 {
     description: "Packaging can do product operations"
     participant: "org.ucsc.agriblockchain.Packaging"
-    operation: ALL
+    operation: CREATE
     resource: "org.ucsc.agriblockchain.Product"
     action: ALLOW
 }
@@ -66,41 +76,32 @@ rule PackagingConditionalRule1 {
 rule WarehouseConditionalRule1 {
     description: "Warehouse can do product operations"
     participant: "org.ucsc.agriblockchain.Warehouse"
-    operation: ALL
-    resource: "org.ucsc.agriblockchain.Product"
-    action: ALLOW
-}
-
-rule RetailConditionalRule1 {
-    description: "Retail can do product operations"
-    participant: "org.ucsc.agriblockchain.Retail"
-    operation: READ, DELETE, UPDATE
+    operation: CREATE
     resource: "org.ucsc.agriblockchain.Product"
     action: ALLOW
 }
 
 rule SeedProviderConditionalRule1 {
-    description: "Retail can do product operations"
-    participant: "org.ucsc.agriblockchain.Retail"
-    operation: READ, DELETE, UPDATE
-    resource: "org.ucsc.agriblockchain.Product"
-    action: ALLOW
-}
-
-rule EverybodyCanSubmitTransactions {
-    description: "Allow all participants to submit transactions"
-    participant: "org.ucsc.agriblockchain.Stakeholder"
+    description: "Seed Provider can do product operations"
+    participant: "org.ucsc.agriblockchain.SeedProvider"
     operation: CREATE
-    resource: "org.ucsc.agriblockchain.DivideAsset"
+    resource: "org.ucsc.agriblockchain.Seed"
     action: ALLOW
 }
 
-rule OwnerHasFullAccessToTheirAssets {
-    description: "Allow all participants full access to their assets"
-    participant(p): "org.ucsc.agriblockchain.Stakeholder"
-    operation: ALL
-    resource(r): "org.ucsc.agriblockchain.Product"
-    condition: (r.owner.getIdentifier() === p.getIdentifier())
+rule FertilizerProviderConditionalRule1 {
+    description: "Fertilizer Provider can do product operations"
+    participant: "org.ucsc.agriblockchain.FertilizerProvider"
+    operation: CREATE
+    resource: "org.ucsc.agriblockchain.Fertilizer"
+    action: ALLOW
+}
+
+rule PesticideProviderConditionalRule1 {
+    description: "Pesticide Provider can do product operations"
+    participant: "org.ucsc.agriblockchain.PesticideProvider"
+    operation: CREATE
+    resource: "org.ucsc.agriblockchain.Pesticide"
     action: ALLOW
 }
 
