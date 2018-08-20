@@ -23,10 +23,66 @@ rule EverybodyCanReadEverything {
     action: ALLOW
 }
 
-rule SampleConditionalRule {
-    description: "Description of the ACL rule"
-    participant: "org.ucsc.agriblockchain.Stakeholder"
+rule FarmerConditionalRule1 {
+    description: "Farmer can do plot operations"
+    participant: "org.ucsc.agriblockchain.Farmer"
     operation: ALL
+    resource: "org.ucsc.agriblockchain.Plot"
+    action: ALLOW
+}
+
+rule FarmerConditionalRule2 {
+    description: "Farmer can do product operations"
+    participant: "org.ucsc.agriblockchain.Farmer"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Product"
+    action: ALLOW
+}
+
+rule FarmerConditionalRule3 {
+    description: "Farmer can do farm operations"
+    participant: "org.ucsc.agriblockchain.Farmer"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Farm"
+    action: ALLOW
+}
+
+rule DistributionConditionalRule1 {
+    description: "Distribution can do product operations"
+    participant: "org.ucsc.agriblockchain.Distribution"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Product"
+    action: ALLOW
+}
+
+rule PackagingConditionalRule1 {
+    description: "Packaging can do product operations"
+    participant: "org.ucsc.agriblockchain.Packaging"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Product"
+    action: ALLOW
+}
+
+rule WarehouseConditionalRule1 {
+    description: "Warehouse can do product operations"
+    participant: "org.ucsc.agriblockchain.Warehouse"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Product"
+    action: ALLOW
+}
+
+rule RetailConditionalRule1 {
+    description: "Retail can do product operations"
+    participant: "org.ucsc.agriblockchain.Retail"
+    operation: READ, DELETE, UPDATE
+    resource: "org.ucsc.agriblockchain.Product"
+    action: ALLOW
+}
+
+rule SeedProviderConditionalRule1 {
+    description: "Retail can do product operations"
+    participant: "org.ucsc.agriblockchain.Retail"
+    operation: READ, DELETE, UPDATE
     resource: "org.ucsc.agriblockchain.Product"
     action: ALLOW
 }
@@ -38,7 +94,6 @@ rule EverybodyCanSubmitTransactions {
     resource: "org.ucsc.agriblockchain.DivideAsset"
     action: ALLOW
 }
-
 
 rule OwnerHasFullAccessToTheirAssets {
     description: "Allow all participants full access to their assets"
@@ -72,6 +127,7 @@ rule NetworkAdminSystem {
     resource: "org.hyperledger.composer.system.**"
     action: ALLOW
 }
+
 rule historianAccess{
   description: "Only allow members to read historian records referencing transactions they submitted."
   participant(p): "org.ucsc.agriblockchain.Stakeholder"

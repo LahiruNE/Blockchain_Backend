@@ -18,15 +18,16 @@ asset Product identified by productId {
 
 asset Plot identified by plotId {
   o String plotId
-  o String cultivationStartDate
+  o DateTime cultivationStartDate
   o Double extent
   o CloserPlots closerplots
   o Activity[] activities
   o PHReading[] phReadings  
   o String certificationBodyComments
+  -->Farm farm
  }
 
- asset Farm identified by farmId{
+asset Farm identified by farmId{
    o String farmId
    o String FarmLocation
    o String[] images optional 
@@ -35,7 +36,8 @@ asset Plot identified by plotId {
    o String otherDescription optional
    o String certificationBodyComments
  }
-asset seed identified by seedId{
+
+asset Seed identified by seedId{
   o String seedId
   o String name
   o DateTime manufactureDate
@@ -44,7 +46,31 @@ asset seed identified by seedId{
   o Integer amount
   o Integer price
   o String[] activeChemicals
+  --> SeedProvider vendor
+}
 
+asset Fertilizer identified by fertilizerId{
+  o String fertilizerId
+  o String name
+  o DateTime manufactureDate
+  o DateTime expiryDate optional
+  o DateTime dateOfSale optional
+  o Integer amount
+  o Integer price
+  o String[] activeChemicals
+  --> FertilizerProvider vendor
+}
+
+asset Pesticide identified by pesticideId{
+  o String pesticideId
+  o String name
+  o DateTime manufactureDate
+  o DateTime expiryDate optional
+  o DateTime dateOfSale optional
+  o Integer amount
+  o Integer price
+  o String[] activeChemicals
+  --> PesticideProvider vendor
 }
 
 concept CloserPlots{
@@ -159,6 +185,24 @@ participant Retail identified by stakeholderId extends Stakeholder {
   o String description optional 
   o String authPerson 
   o String branchNo
+}
+
+participant SeedProvider identified by seedProviderId extends Stakeholder {
+  o String seedProviderId
+  o String description optional 
+  o String authPerson
+}
+
+participant FertilizerProvider identified by fertilizerProviderId extends Stakeholder {
+  o String fertilizerProviderId
+  o String description optional 
+  o String authPerson
+}
+
+participant PesticideProvider identified by pesticideProviderId extends Stakeholder {
+  o String pesticideProviderId
+  o String description optional 
+  o String authPerson
 }
 
 transaction TransferPackage {
