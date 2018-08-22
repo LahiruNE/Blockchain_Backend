@@ -35,6 +35,7 @@ asset Farm identified by farmId{
    o String[] nearFactories
    o String otherDescription optional
    o Certification certification 
+   --> Stakeholder owner
  }
 
 asset Seed identified by seedId{

@@ -32,11 +32,29 @@ rule RetailConditionalRule1 {
     action: DENY
 }
 
-rule OwnerHasFullAccessToTheirAssets {
+rule OwnerHasFullAccessToTheirProducts {
     description: "Allow all participants full access to their assets"
     participant(p): "org.ucsc.agriblockchain.Stakeholder"
     operation: ALL
-    resource(r): "org.ucsc.agriblockchain.*"
+    resource(r): "org.ucsc.agriblockchain.Product"
+    condition: (r.currentOwner.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule OwnerHasFullAccessToTheirPlots {
+    description: "Allow all participants full access to their assets"
+    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource(r): "org.ucsc.agriblockchain.Plot"
+    condition: (r.farm.owner.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
+
+rule OwnerHasFullAccessToTheirFarms {
+    description: "Allow all participants full access to their assets"
+    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource(r): "org.ucsc.agriblockchain.Farm"
     condition: (r.owner.getIdentifier() === p.getIdentifier())
     action: ALLOW
 }
