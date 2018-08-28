@@ -155,7 +155,9 @@ abstract participant Stakeholder {
   o String telephone optional
   o Certification certification optional 
   o String[] images optional
-  o Company company     
+  o Company company
+  o String username
+  o String password     
 }
 
 participant Farmer identified by stakeholderId extends Stakeholder {
