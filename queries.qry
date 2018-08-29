@@ -4,3 +4,18 @@ statement:
         SELECT org.ucsc.agriblockchain.Product
           WHERE  (productType == _$productType) 
 }
+
+query getUserFromUsername{
+description:"get user from username"
+statement:
+        SELECT org.ucsc.agriblockchain.Stakeholder
+          WHERE  (username == _$username) 
+}
+
+query getUserFromUsernamePassword{
+description:"get user from username"
+statement:
+        SELECT org.ucsc.agriblockchain.Stakeholder
+          WHERE  (username == _$username AND password == _$password) 
+}
+

@@ -48,7 +48,7 @@ asset Seed identified by seedId{
   o Integer price
   o String[] activeChemicals
   o Certification certification 
-  --> SeedProvider vendor
+  --> Stakeholder vendor
 }
 
 asset Fertilizer identified by fertilizerId{
@@ -61,7 +61,7 @@ asset Fertilizer identified by fertilizerId{
   o Integer price
   o String[] activeChemicals
   o Certification certification 
-  --> FertilizerProvider vendor
+  --> Stakeholder vendor
 }
 
 asset Pesticide identified by pesticideId{
@@ -74,7 +74,7 @@ asset Pesticide identified by pesticideId{
   o Integer price
   o String[] activeChemicals
   o Certification certification 
-  --> PesticideProvider vendor
+  --> Stakeholder vendor
 }
 
 concept CloserPlots{
@@ -105,7 +105,7 @@ concept Company {
 
 concept Certification {
   o String certificationNo
-  --> CertificationBody certificationBody
+  --> Stakeholder certificationBody
   o DateTime from
   o DateTime to
   o String[] images
@@ -143,12 +143,26 @@ enum ActiveStatus {
   o ACTIVE
   o CLOSED
 }
+
 enum ActivityType  {
   o LANDSCAPING
   o WATERING
-
 }
-abstract participant Stakeholder {
+
+enum StakeholderType{
+  o FARMER
+  o DISTRIBUTION
+  o PACKAGING
+  o WAREHOUSE
+  o RETAIL
+  o FERTILIZER
+  o SEED
+  o PESTICIDE
+  o CERTIFICATION
+}
+
+participant Stakeholder identified by stakeholderId{
+  o String stakeholderId
   o String name
   o Address address
   o String email optional 
@@ -157,64 +171,14 @@ abstract participant Stakeholder {
   o String[] images optional
   o Company company
   o String username
-  o String password     
-}
-
-participant Farmer identified by stakeholderId extends Stakeholder {
-  o String stakeholderId
-  o String description optional  
-  --> Farm[] farms
-}
-
-participant Distribution identified by stakeholderId extends Stakeholder {
-  o String stakeholderId
-  o String description optional 
+  o String password 
+  o StakeholderType type
+  o String description optional //farmer,distribution, packagin,warehouse, retail, seed, fertilizer, pest
   o String authPerson 
+  --> Farm[] farms optional //farmer attr  
   o String vehicleNo optional
-  o DistType type
-}
-
-participant Packaging identified by stakeholderId extends Stakeholder {
-  o String stakeholderId
-  o String description optional 
-  o String authPerson 
-}
-
-participant Warehouse identified by stakeholderId extends Stakeholder {
-  o String stakeholderId
-  o String description optional 
-  o String authPerson 
-}
-
-participant Retail identified by stakeholderId extends Stakeholder {
-  o String stakeholderId
-  o String description optional 
-  o String authPerson 
-  o String branchNo
-}
-
-participant SeedProvider identified by seedProviderId extends Stakeholder {
-  o String seedProviderId
-  o String description optional 
-  o String authPerson
-}
-
-participant FertilizerProvider identified by fertilizerProviderId extends Stakeholder {
-  o String fertilizerProviderId
-  o String description optional 
-  o String authPerson
-}
-
-participant PesticideProvider identified by pesticideProviderId extends Stakeholder {
-  o String pesticideProviderId
-  o String description optional 
-  o String authPerson
-}
-
-participant CertificationBody identified by certificationBodyId extends Stakeholder {
-  o String certificationBodyId
-  o String description optional 
-  o String authPerson
+  o DistType distributionType optional //distribution  
+  o String branchNo optional //retail 
 }
 
 transaction TransferPackage {
