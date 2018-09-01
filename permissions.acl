@@ -15,6 +15,25 @@
 /**
  * Sample access control list.
  */
+
+rule AdminCanDoAll {
+    description: "Allow all participants read access to all resources"
+    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource(r): "org.ucsc.agriblockchain.*"
+    condition: (p.type == "ADMIN")
+    action: ALLOW
+} 
+
+rule UserCanRead {
+    description: "Allow all participants read access to all resources"
+    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    operation: READ, UPDATE
+    resource(r): "org.ucsc.agriblockchain.Stakeholder"
+    condition: (p.username == r.username)
+    action: ALLOW
+}
+
 rule CertificationCanRead {
     description: "Allow all participants read access to all resources"
     participant(p): "org.ucsc.agriblockchain.Stakeholder"

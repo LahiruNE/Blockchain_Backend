@@ -150,6 +150,7 @@ enum ActivityType  {
 }
 
 enum StakeholderType{
+  o ADMIN
   o FARMER
   o DISTRIBUTION
   o PACKAGING
