@@ -36,6 +36,7 @@ asset Farm identified by farmId{
    o String otherDescription optional
    o Certification certification 
    --> Stakeholder owner
+   --> Stakeholder[] farmers 
  }
 
 asset Seed identified by seedId{
@@ -48,7 +49,8 @@ asset Seed identified by seedId{
   o Integer price
   o String[] activeChemicals
   o Certification certification 
-  --> Stakeholder vendor
+  --> Stakeholder currentOwner
+  --> Stakeholder issuer 
 }
 
 asset Fertilizer identified by fertilizerId{
@@ -61,7 +63,8 @@ asset Fertilizer identified by fertilizerId{
   o Integer price
   o String[] activeChemicals
   o Certification certification 
-  --> Stakeholder vendor
+  --> Stakeholder currentOwner
+  --> Stakeholder issuer 
 }
 
 asset Pesticide identified by pesticideId{
@@ -74,7 +77,8 @@ asset Pesticide identified by pesticideId{
   o Integer price
   o String[] activeChemicals
   o Certification certification 
-  --> Stakeholder vendor
+  --> Stakeholder currentOwner
+  --> Stakeholder issuer 
 }
 
 concept CloserPlots{
@@ -176,7 +180,6 @@ participant Stakeholder identified by stakeholderId{
   o StakeholderType type
   o String description optional //farmer,distribution, packagin,warehouse, retail, seed, fertilizer, pest
   o String authPerson 
-  --> Farm[] farms optional //farmer attr  
   o String vehicleNo optional
   o DistType distributionType optional //distribution  
   o String branchNo optional //retail 
