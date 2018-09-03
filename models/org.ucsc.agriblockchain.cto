@@ -109,11 +109,11 @@ concept Company {
 
 concept Certification {
   o String certificationNo
-  --> Stakeholder certificationBody
-  o DateTime from
-  o DateTime to
-  o String[] images
-  o String[] comment
+  --> Stakeholder certificationBody optional
+  o DateTime from optional
+  o DateTime to optional
+  o String[] images optional
+  o String[] comment optional
 }
 
 enum ProductType {
