@@ -20,7 +20,7 @@ asset Plot identified by plotId {
   o String plotId
   o DateTime cultivationStartDate
   o Double extent
-  o CloserPlots closerplots
+  o Directions closerplots
   o Activity[] activities
   o PHReading[] phReadings  
   o String[] certificationBodyComments
@@ -31,8 +31,8 @@ asset Farm identified by farmId{
    o String farmId
    o String FarmLocation
    o String[] images optional 
-   o String[] waterSources
-   o String[] nearFactories
+   o Directions waterSources
+   o Directions nearFactories
    o String otherDescription optional
    o Certification certification 
    --> Stakeholder owner
@@ -81,7 +81,7 @@ asset Pesticide identified by pesticideId{
   --> Stakeholder issuer 
 }
 
-concept CloserPlots{
+concept Directions{
   o String North
   o String East
   o String South
