@@ -19,3 +19,44 @@ statement:
           WHERE  (username == _$username AND password == _$password) 
 }
 
+query getFromCertificationBody{
+  description:"get user from certificationbody"
+  statement:
+        SELECT org.ucsc.agriblockchain.Stakeholder
+          WHERE (type == 'CERTIFICATION')
+}
+
+query getFromFarmer{
+  description:"get user from certificationbody"
+  statement:
+        SELECT org.ucsc.agriblockchain.Stakeholder
+          WHERE (type == _$type AND certification.certificationBody == _$certificationBody)
+}
+
+query getFromHistorian{
+description:"get user transactions"
+statement:
+      SELECT org.hyperledger.composer.system.HistorianRecord
+      WHERE (participantInvoking == _$Stakeholder)
+ }  
+
+query showCommodityAllHistorians{ 
+  description: "Select commodity all historians" 
+  statement: 
+    SELECT org.hyperledger.composer.system.HistorianRecord 
+    WHERE (transactionType == 'AddAsset' OR transactionType == 'UpdateAsset' OR transactionType == 'RemoveAsset') 
+} 
+ 
+query findCommmodityHistoriansWithTime{ 
+  description: "Find commodity historians after a specified time" 
+  statement: 
+    SELECT org.hyperledger.composer.system.HistorianRecord 
+    WHERE (transactionTimestamp == _$justnow) 
+}
+
+query getHistorian{ 
+  description: "Find commodity historians after a specified time" 
+  statement: 
+    SELECT org.hyperledger.composer.system.HistorianRecord 
+    
+}

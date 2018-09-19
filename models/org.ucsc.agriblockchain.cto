@@ -183,6 +183,8 @@ participant Stakeholder identified by stakeholderId{
   o String vehicleNo optional
   o DistType distributionType optional //distribution  
   o String branchNo optional //retail 
+  o String comment optional
+  o String rating optional
 }
 
 transaction TransferPackage {
