@@ -24,6 +24,8 @@ asset Plot identified by plotId {
   o Activity[] activities
   o PHReading[] phReadings  
   o String[] certificationBodyComments
+  o PlotStatus status
+  o ProductType cultivatedType optional
   -->Farm farm
  }
 
@@ -45,6 +47,7 @@ asset Seed identified by seedId{
   o DateTime manufactureDate
   o DateTime expiryDate optional
   o DateTime dateOfSale optional
+  o ProductType type
   o Integer amount
   o Integer price
   o String[] activeChemicals
@@ -120,6 +123,12 @@ enum ProductType {
   o CARROT
   o TOMATO
   o PINEAPPLE
+}
+
+enum PlotStatus {
+  o NEW
+  o HARVESTED
+  o SEEDED
 }
 
 enum DistType {
