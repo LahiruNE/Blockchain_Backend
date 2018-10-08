@@ -20,10 +20,12 @@ asset Plot identified by plotId {
   o String plotId
   o DateTime cultivationStartDate
   o Double extent
-  o CloserPlots closerplots
+  o Directions closerplots
   o Activity[] activities
   o PHReading[] phReadings  
   o String[] certificationBodyComments
+  o PlotStatus status
+  o ProductType cultivatedType optional
   -->Farm farm
  }
 
@@ -31,8 +33,8 @@ asset Farm identified by farmId{
    o String farmId
    o String FarmLocation
    o String[] images optional 
-   o String[] waterSources
-   o String[] nearFactories
+   o Directions waterSources
+   o Directions nearFactories
    o String otherDescription optional
    o Certification certification 
    --> Stakeholder owner
@@ -45,6 +47,7 @@ asset Seed identified by seedId{
   o DateTime manufactureDate
   o DateTime expiryDate optional
   o DateTime dateOfSale optional
+  o ProductType type
   o Integer amount
   o Integer price
   o String[] activeChemicals
@@ -81,7 +84,7 @@ asset Pesticide identified by pesticideId{
   --> Stakeholder issuer 
 }
 
-concept CloserPlots{
+concept Directions{
   o String North
   o String East
   o String South
@@ -120,6 +123,12 @@ enum ProductType {
   o CARROT
   o TOMATO
   o PINEAPPLE
+}
+
+enum PlotStatus {
+  o NEW
+  o HARVESTED
+  o SEEDED
 }
 
 enum DistType {
