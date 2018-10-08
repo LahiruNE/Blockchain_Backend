@@ -38,7 +38,42 @@ description:"get user transactions"
 statement:
       SELECT org.hyperledger.composer.system.HistorianRecord
       WHERE (participantInvoking == _$Stakeholder)
+ } 
+
+ query getFromHistorianidentity{
+description:"get user transactions"
+statement:
+      SELECT org.hyperledger.composer.system.IssueIdentity
+      WHERE (transactionId == _$Id)
+ } 
+
+ query getFromHistorianadd{
+description:"get user transactions"
+statement:
+      SELECT org.hyperledger.composer.system.AddParticipant
+      WHERE (transactionId == _$Id)
+ } 
+
+ query getFromHistorianaddasset{
+description:"get user transactions"
+statement:
+      SELECT org.hyperledger.composer.system.AddAsset
+      WHERE (transactionId == _$Id)
+ } 
+
+ query getFromHistorianupdate{
+description:"get user transactions"
+statement:
+      SELECT org.hyperledger.composer.system.UpdateParticipant
+      WHERE (transactionId == _$Id)
  }  
+
+ query getFromHistorianupdateasset{
+description:"get user transactions"
+statement:
+      SELECT org.hyperledger.composer.system.UpdateAsset
+      WHERE (transactionId == _$Id)
+ } 
 
 query showCommodityAllHistorians{ 
   description: "Select commodity all historians" 
