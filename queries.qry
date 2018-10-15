@@ -1,8 +1,15 @@
-query selectProductsByProductType{
-description:"Product Type"
+query selectPlotByProductId{
+description:"user update history"
 statement:
-        SELECT org.ucsc.agriblockchain.Product
-          WHERE  (productType == _$productType) 
+        SELECT org.ucsc.agriblockchain.Plot
+        WHERE  (plotId == _$plotId) 
+}
+
+query selectFarmByFarmId{
+description:"user update history"
+statement:
+        SELECT org.ucsc.agriblockchain.Farm
+        WHERE  (farmId == _$farmId) 
 }
 
 query getUserFromUsername{
@@ -74,6 +81,37 @@ statement:
       SELECT org.hyperledger.composer.system.UpdateAsset
       WHERE (transactionId == _$Id)
  } 
+
+query getFromHistorianactivity{
+description:"get user transactions"
+statement:
+      SELECT org.ucsc.agriblockchain.Activity
+      WHERE (transactionId == _$Id)
+ } 
+query getFromHistorianph{
+description:"get user transactions"
+statement:
+      SELECT org.ucsc.agriblockchain.PHReading
+      WHERE (transactionId == _$Id)
+ }
+query getFromHistoriantransferpackage{
+description:"get user transactions"
+statement:
+      SELECT org.ucsc.agriblockchain.TransferPackage
+      WHERE (transactionId == _$Id)
+ }
+query getFromHistorianmergeasset{
+description:"get user transactions"
+statement:
+      SELECT org.ucsc.agriblockchain.MergeAsset
+      WHERE (transactionId == _$Id)
+ }
+query getFromHistoriandivideasset{
+description:"get user transactions"
+statement:
+      SELECT org.ucsc.agriblockchain.DivideAsset
+      WHERE (transactionId == _$Id)
+ }
 
 query showCommodityAllHistorians{ 
   description: "Select commodity all historians" 

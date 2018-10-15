@@ -3,7 +3,7 @@
     "composer": "^0.19.10"
   },
   "name": "backend",
-  "version": "0.0.20",
+  "version": "0.0.45",
   "description": "Blockchain instance for AgriBlockchain ",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/backend.bna",
