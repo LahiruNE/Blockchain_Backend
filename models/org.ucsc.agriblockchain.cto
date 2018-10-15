@@ -58,6 +58,7 @@ asset Seed identified by seedId{
   --> Seed parentProduct optional 
   o DivideStatus divideStatus
   o ActiveStatus activeStatus 
+  o Trace[] productpath optional
 }
 
 asset Fertilizer identified by fertilizerId{
@@ -75,6 +76,7 @@ asset Fertilizer identified by fertilizerId{
   --> Fertilizer parentProduct optional 
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
+  o Trace[] productpath optional
 }
 
 asset Pesticide identified by pesticideId{
@@ -92,6 +94,7 @@ asset Pesticide identified by pesticideId{
   --> Pesticide parentProduct optional 
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
+  o Trace[] productpath optional
 }
 
 concept Directions{
@@ -207,7 +210,10 @@ participant Stakeholder identified by stakeholderId{
 }
 
 transaction TransferPackage {
-  --> Product product
+  --> Product product optional
+  --> Seed seed optional
+  --> Fertilizer fertilizer optional
+  --> Pesticide pesticide optional
   --> Stakeholder newOwner
 }
 
