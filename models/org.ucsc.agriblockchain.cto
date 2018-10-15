@@ -19,6 +19,7 @@ asset Product identified by productId {
 asset Plot identified by plotId {
   o String plotId
   o DateTime cultivationStartDate
+  o DateTime seededDate optional
   o Double extent
   o Directions closerplots
   o Activity[] activities
@@ -48,12 +49,15 @@ asset Seed identified by seedId{
   o DateTime expiryDate optional
   o DateTime dateOfSale optional
   o ProductType type
-  o Integer amount
-  o Integer price
+  o Double amount
+  o Double price
   o String[] activeChemicals
   o Certification certification 
   --> Stakeholder currentOwner
-  --> Stakeholder issuer 
+  --> Stakeholder issuer
+  --> Seed parentProduct optional 
+  o DivideStatus divideStatus
+  o ActiveStatus activeStatus 
 }
 
 asset Fertilizer identified by fertilizerId{
@@ -62,12 +66,15 @@ asset Fertilizer identified by fertilizerId{
   o DateTime manufactureDate
   o DateTime expiryDate optional
   o DateTime dateOfSale optional
-  o Integer amount
-  o Integer price
+  o Double amount
+  o Double price
   o String[] activeChemicals
   o Certification certification 
   --> Stakeholder currentOwner
   --> Stakeholder issuer 
+  --> Fertilizer parentProduct optional 
+  o DivideStatus divideStatus
+  o ActiveStatus activeStatus
 }
 
 asset Pesticide identified by pesticideId{
@@ -76,12 +83,15 @@ asset Pesticide identified by pesticideId{
   o DateTime manufactureDate
   o DateTime expiryDate optional
   o DateTime dateOfSale optional
-  o Integer amount
-  o Integer price
+  o Double amount
+  o Double price
   o String[] activeChemicals
   o Certification certification 
   --> Stakeholder currentOwner
   --> Stakeholder issuer 
+  --> Pesticide parentProduct optional 
+  o DivideStatus divideStatus
+  o ActiveStatus activeStatus
 }
 
 concept Directions{
@@ -202,7 +212,10 @@ transaction TransferPackage {
 }
 
 transaction DivideAsset {
-  --> Product product
+  --> Product product optional
+  --> Seed seed optional
+  --> Fertilizer fertilizer optional
+  --> Pesticide pesticide optional
   o Double[] divideQty
 }
 
