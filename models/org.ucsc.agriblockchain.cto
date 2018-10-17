@@ -173,6 +173,7 @@ enum ActiveStatus {
 enum ActivityType  {
   o LANDSCAPING
   o WATERING
+  o MANURING
 }
 
 enum StakeholderType{
@@ -236,6 +237,7 @@ transaction PHReading {
 transaction Activity{
   --> Plot plot
   o ActivityType activitytype
+  o Double amount optional
   o DateTime time
 }
 event PHThresholdEvent {
