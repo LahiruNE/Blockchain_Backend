@@ -237,6 +237,8 @@ transaction PHReading {
 transaction Activity{
   --> Plot plot
   o ActivityType activitytype
+  --> Fertilizer fertilizer optional
+  --> Pesticide pesticide optional
   o Double amount optional
   o DateTime time
 }
