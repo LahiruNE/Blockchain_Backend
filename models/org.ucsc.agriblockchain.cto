@@ -14,6 +14,8 @@ asset Product identified by productId {
   --> Product parentProduct optional 
   --> Stakeholder currentOwner
   --> Stakeholder issuer 
+  o TransferDetails transferDetails optional
+
 }
 
 asset Plot identified by plotId {
@@ -97,7 +99,13 @@ asset Pesticide identified by pesticideId{
   o Trace[] productpath optional
 }
 
-concept Directions{
+concept TransferDetails {
+  o TransferStatus status
+  o String comment optional 
+  --> Stakeholder invokedBy 
+}
+
+concept Directions {
   o String North
   o String East
   o String South
@@ -130,6 +138,12 @@ concept Certification {
   o DateTime to optional
   o String[] images optional
   o String[] comment optional
+}
+
+enum TransferStatus {
+  o PENDING
+  o APPROVED
+  o REJECTED
 }
 
 enum ProductType {

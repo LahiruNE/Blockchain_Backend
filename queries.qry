@@ -130,6 +130,26 @@ query findCommmodityHistoriansWithTime{
 query getHistorian{ 
   description: "Find commodity historians after a specified time" 
   statement: 
-    SELECT org.hyperledger.composer.system.HistorianRecord 
-    
+    SELECT org.hyperledger.composer.system.HistorianRecord     
+}
+
+query getSubmittedRequests{
+  description:"get all submitted product transfer requests by user"
+  statement:
+          SELECT org.ucsc.agriblockchain.Product
+            WHERE  ((transferDetails.status == "PENDING" OR transferDetails.status == "REJECTED") AND transferDetails.invokedBy == _$user) 
+}
+
+query getPendingRequests{
+  description:"get all pending product transfer requests for user"
+  statement:
+          SELECT org.ucsc.agriblockchain.Product
+            WHERE  (transferDetails.status == "PENDING" AND currentOwner == _$user) 
+}
+
+query getOwnedProducts{
+  description:"get all owned products of user"
+  statement:
+          SELECT org.ucsc.agriblockchain.Product
+            WHERE  (currentOwner == _$user) 
 }
