@@ -151,5 +151,5 @@ query getOwnedProducts{
   description:"get all owned products of user"
   statement:
           SELECT org.ucsc.agriblockchain.Product
-            WHERE  (currentOwner == _$user) 
+            WHERE  (currentOwner == _$user AND activeStatus != "CLOSED") 
 }
