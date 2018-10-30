@@ -114,6 +114,8 @@ concept Directions {
 
 concept Trace {
   o DateTime timestamp
+  o Double Qty
+  o Double curQty
   --> Stakeholder authperson
 }
 
@@ -226,6 +228,7 @@ participant Stakeholder identified by stakeholderId{
 
 transaction TransferPackage {
   --> Product product optional
+  o Double transferQty
   --> Seed seed optional
   --> Fertilizer fertilizer optional
   --> Pesticide pesticide optional
