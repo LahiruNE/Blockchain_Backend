@@ -25,6 +25,7 @@ asset Plot identified by plotId {
   o Double extent
   o Directions closerplots
   o Activity[] activities
+  o Inspection[] certificationactivity 
   o PHReading[] phReadings  
   o String[] certificationBodyComments
   o PlotStatus status
@@ -40,6 +41,7 @@ asset Farm identified by farmId{
    o Directions nearFactories
    o String otherDescription optional
    o Certification certification 
+   o Inspection[] certificationactivity 
    --> Stakeholder owner
    --> Stakeholder[] farmers 
  }
@@ -114,8 +116,8 @@ concept Directions {
 
 concept Trace {
   o DateTime timestamp
-  o Double Qty
-  o Double curQty
+  o Double quantity
+  o String type 
   --> Stakeholder authperson
 }
 
@@ -212,6 +214,7 @@ participant Stakeholder identified by stakeholderId{
   o String email optional 
   o String telephone optional
   o Certification certification optional 
+  o Inspection[] certificationactivity 
   o String[] images optional
   o Company company
   o String username
@@ -258,6 +261,13 @@ transaction Activity{
   --> Pesticide pesticide optional
   o Double amount optional
   o DateTime time
+}
+transaction Inspection {
+  o DateTime date
+  o String comment
+  --> Farm farm optional
+  --> Stakeholder stakeholder optional
+  --> Plot plot optional
 }
 event PHThresholdEvent {
   --> Plot plot
