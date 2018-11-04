@@ -31,6 +31,7 @@ asset Plot identified by plotId {
   o PlotStatus status
   o ProductType cultivatedType optional
   -->Farm farm
+  o GrowthProgress growthProgress optional 
  }
 
 asset Farm identified by farmId{
@@ -41,7 +42,7 @@ asset Farm identified by farmId{
    o Directions nearFactories
    o String otherDescription optional
    o Certification certification 
-   o Inspection[] certificationactivity 
+   o Inspection[] certificationactivity optional
    --> Stakeholder owner
    --> Stakeholder[] farmers 
  }
@@ -99,6 +100,20 @@ asset Pesticide identified by pesticideId{
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
   o Trace[] productpath optional
+}
+
+concept GrowthProgress {
+  o GrowthRecord[] growCount optional
+  o GrowthRecord[] fruitCount optional
+  o GrowthRecord[] destroyedCount optional 
+
+}
+
+concept GrowthRecord {
+  o DateTime date
+  o DateTime addedDate
+  o Double count
+  o String comment optional 
 }
 
 concept TransferDetails {
