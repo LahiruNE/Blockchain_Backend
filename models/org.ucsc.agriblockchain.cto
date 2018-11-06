@@ -246,7 +246,6 @@ participant Stakeholder identified by stakeholderId{
 
 transaction TransferPackage {
   --> Product product optional
-  o Double transferQty
   --> Seed seed optional
   --> Fertilizer fertilizer optional
   --> Pesticide pesticide optional
@@ -279,6 +278,7 @@ transaction Activity{
 }
 transaction Inspection {
   o DateTime date
+  o DateTime time optional
   o String comment
   --> Farm farm optional
   --> Stakeholder stakeholder optional
