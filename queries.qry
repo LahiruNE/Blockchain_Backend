@@ -153,3 +153,10 @@ query getOwnedProducts{
           SELECT org.ucsc.agriblockchain.Product
             WHERE  (currentOwner == _$user AND activeStatus != "CLOSED") 
 }
+
+query getHarvestDetails{
+  description:"get harvest details of a plot"
+  statement:
+          SELECT org.ucsc.agriblockchain.Product
+            WHERE  (plot == _$plot) 
+}

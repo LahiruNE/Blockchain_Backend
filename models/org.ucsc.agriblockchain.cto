@@ -22,6 +22,8 @@ asset Plot identified by plotId {
   o String plotId
   o DateTime cultivationStartDate
   o DateTime seededDate optional
+  o Double seededAmount optional
+  --> Seed seed optional
   o Double extent
   o Directions closerplots
   o Activity[] activities
