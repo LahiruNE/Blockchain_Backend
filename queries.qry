@@ -54,6 +54,20 @@ statement:
       WHERE (transactionId == _$Id)
  } 
 
+ query getFromHistorianinspection{
+description:"get user transactions"
+statement:
+      SELECT org.ucsc.agriblockchain.Inspection
+      WHERE (transactionId == _$Id)
+ } 
+
+  query getFromHistorianremove{
+description:"get user transactions"
+statement:
+      SELECT org.hyperledger.composer.system.RemoveAsset
+      WHERE (transactionId == _$Id)
+ } 
+
  query getFromHistorianadd{
 description:"get user transactions"
 statement:

@@ -9,6 +9,8 @@ asset Product identified by productId {
   o Unit unit
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
+  o Double wastequantity optional
+  o Double lostquantity optional
   o Trace[] productpath optional
   --> Plot plot 
   --> Product parentProduct optional 
