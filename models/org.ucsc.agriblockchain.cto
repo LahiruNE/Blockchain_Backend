@@ -11,6 +11,7 @@ asset Product identified by productId {
   o ActiveStatus activeStatus
   o Double wastequantity optional
   o Double lostquantity optional
+  o String wastecomment optional
   o Trace[] productpath optional
   --> Plot plot 
   --> Product parentProduct optional 
@@ -31,6 +32,7 @@ asset Plot identified by plotId {
   o Activity[] activities
   o Inspection[] certificationactivity 
   o PHReading[] phReadings  
+  o SoilConductivity[] conductivityReadings  
   o String[] certificationBodyComments
   o PlotStatus status
   o ProductType cultivatedType optional
@@ -47,6 +49,7 @@ asset Farm identified by farmId{
    o String otherDescription optional
    o Certification certification 
    o Inspection[] certificationactivity optional
+   o Diary[] diaryrecords optional
    --> Stakeholder owner
    --> Stakeholder[] farmers 
  }
@@ -272,6 +275,12 @@ transaction PHReading {
   o Double ph
   o DateTime readingTime
 }
+
+transaction SoilConductivity {
+  --> Plot plot
+  o Double conductivity
+  o DateTime readingTime
+}
 transaction Activity{
   --> Plot plot
   o ActivityType activitytype
@@ -287,6 +296,14 @@ transaction Inspection {
   --> Farm farm optional
   --> Stakeholder stakeholder optional
   --> Plot plot optional
+}
+
+transaction Diary {
+  o DateTime date
+  o DateTime time optional
+  o String record
+  --> Stakeholder owner optional
+  --> Farm farm optional
 }
 event PHThresholdEvent {
   --> Plot plot

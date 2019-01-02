@@ -60,7 +60,13 @@ statement:
       SELECT org.ucsc.agriblockchain.Inspection
       WHERE (transactionId == _$Id)
  } 
-
+ 
+ query getFromHistoriandiary{
+description:"get user transactions"
+statement:
+      SELECT org.ucsc.agriblockchain.Diary
+      WHERE (transactionId == _$Id)
+ } 
   query getFromHistorianremove{
 description:"get user transactions"
 statement:
@@ -166,6 +172,20 @@ query getOwnedProducts{
   statement:
           SELECT org.ucsc.agriblockchain.Product
             WHERE  (currentOwner == _$user AND activeStatus != "CLOSED") 
+}
+
+query getOwnedFarms{
+  description:"get all owned Farms of user"
+  statement:
+          SELECT org.ucsc.agriblockchain.Farm
+            WHERE  (owner == _$user) 
+}
+
+query getOwnedRecords{
+  description:"get all owned records of user"
+  statement:
+          SELECT org.ucsc.agriblockchain.Diary
+            WHERE  (owner == _$user) 
 }
 
 query getHarvestDetails{
