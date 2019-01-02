@@ -38,6 +38,8 @@ asset Plot identified by plotId {
   o ProductType cultivatedType optional
   -->Farm farm
   o GrowthProgress growthProgress optional 
+  o ECVar[] ECVar optional
+  o String[] ECAvailDates optional 
  }
 
 asset Farm identified by farmId{
@@ -107,6 +109,12 @@ asset Pesticide identified by pesticideId{
   o DivideStatus divideStatus
   o ActiveStatus activeStatus
   o Trace[] productpath optional
+}
+
+concept ECVar {
+  o DateTime date optional
+  o DateTime time optional
+  o Double value
 }
 
 concept GrowthProgress {
