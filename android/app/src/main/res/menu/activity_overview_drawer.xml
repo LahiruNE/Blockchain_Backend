@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_plot_details"
+            android:title="Plot Details" />
+        <item
+            android:id="@+id/nav_farm_details"
+            android:title="Farm Details" />
+        <item
+            android:id="@+id/nav_certification_details"
+            android:title="Certification Details" />
+        <item
+            android:id="@+id/nav_product_path"
+            android:title="Product Path" />
+        <item
+            android:id="@+id/nav_plot_activities"
+            android:title="Plot Activities" />
+        <item
+            android:id="@+id/nav_certification_body_comments"
+            android:title="Certification Body Comments" />
+        <item
+            android:id="@+id/nav_ph_reading"
+            android:title="PH Reading" />
+    </group>
+
+    <!--<item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:title="Send" />
+        </menu>
+    </item>-->
+
+</menu>

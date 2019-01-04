@@ -1,0 +1,227 @@
+namespace org.ucsc.agriblockchain
+
+asset Product identified by productId {
+  o String productId
+  o DateTime pluckedDate
+  o Certification certification
+  o ProductType productType
+  o Double quantity
+  o Unit unit
+  o DivideStatus divideStatus
+  o ActiveStatus activeStatus
+  o Trace[] productpath optional
+  --> Plot plot
+  --> Product parentProduct optional
+  --> Stakeholder currentOwner
+  --> Stakeholder issuer
+}
+
+asset Plot identified by plotId {
+  o String plotId
+  o DateTime cultivationStartDate
+  o Double extent
+  o Directions closerplots
+  o Activity[] activities
+  o PHReading[] phReadings
+  o String[] certificationBodyComments
+  o PlotStatus status
+  o ProductType cultivatedType optional
+  -->Farm farm
+ }
+
+asset Farm identified by farmId{
+   o String farmId
+   o String FarmLocation
+   o String[] images optional
+   o Directions waterSources
+   o Directions nearFactories
+   o String otherDescription optional
+   o Certification certification
+   --> Stakeholder owner
+   --> Stakeholder[] farmers
+ }
+
+asset Seed identified by seedId{
+  o String seedId
+  o String name
+  o DateTime manufactureDate
+  o DateTime expiryDate optional
+  o DateTime dateOfSale optional
+  o ProductType type
+  o Integer amount
+  o Integer price
+  o String[] activeChemicals
+  o Certification certification
+  --> Stakeholder currentOwner
+  --> Stakeholder issuer
+}
+
+asset Fertilizer identified by fertilizerId{
+  o String fertilizerId
+  o String name
+  o DateTime manufactureDate
+  o DateTime expiryDate optional
+  o DateTime dateOfSale optional
+  o Integer amount
+  o Integer price
+  o String[] activeChemicals
+  o Certification certification
+  --> Stakeholder currentOwner
+  --> Stakeholder issuer
+}
+
+asset Pesticide identified by pesticideId{
+  o String pesticideId
+  o String name
+  o DateTime manufactureDate
+  o DateTime expiryDate optional
+  o DateTime dateOfSale optional
+  o Integer amount
+  o Integer price
+  o String[] activeChemicals
+  o Certification certification
+  --> Stakeholder currentOwner
+  --> Stakeholder issuer
+}
+
+concept Directions{
+  o String North
+  o String East
+  o String South
+  o String West
+}
+
+concept Trace {
+  o DateTime timestamp
+      --> Stakeholder authperson
+}
+
+concept Address {
+  o String postalCode optional
+  o String no optional
+  o String street optional
+  o String city
+  o String country
+}
+
+concept Company {
+  o String name
+  o Address address
+  o String telephone optional
+}
+
+concept Certification {
+  o String certificationNo
+  --> Stakeholder certificationBody optional
+  o DateTime from optional
+  o DateTime to optional
+  o String[] images optional
+  o String[] comment optional
+}
+
+enum ProductType {
+  o CARROT
+  o TOMATO
+  o PINEAPPLE
+}
+
+enum PlotStatus {
+  o NEW
+  o HARVESTED
+  o SEEDED
+}
+
+enum DistType {
+  o F2P
+  o P2W
+  o W2R
+}
+
+enum Unit {
+  o KG
+  o G
+  o MT
+  o L
+  o ML
+  o ITEM
+}
+
+enum DivideStatus {
+  o ORIGINAL
+  o DIVIDED
+  o MERGED
+}
+
+enum ActiveStatus {
+  o ACTIVE
+  o CLOSED
+}
+
+enum ActivityType  {
+  o LANDSCAPING
+  o WATERING
+}
+
+enum StakeholderType{
+  o ADMIN
+  o FARMER
+  o DISTRIBUTION
+  o PACKAGING
+  o WAREHOUSE
+  o RETAIL
+  o FERTILIZER
+  o SEED
+  o PESTICIDE
+  o CERTIFICATION
+}
+
+participant Stakeholder identified by stakeholderId{
+  o String stakeholderId
+  o String name
+  o Address address
+  o String email optional
+  o String telephone optional
+  o Certification certification optional
+  o String[] images optional
+  o Company company
+  o String username
+  o String password
+  o StakeholderType type
+  o String description optional //farmer,distribution, packagin,warehouse, retail, seed, fertilizer, pest
+  o String authPerson
+  o String vehicleNo optional
+  o DistType distributionType optional //distribution
+  o String branchNo optional //retail
+  o String comment optional
+  o String rating optional
+}
+
+transaction TransferPackage {
+  --> Product product
+  --> Stakeholder newOwner
+}
+
+transaction DivideAsset {
+  --> Product product
+  o Double[] divideQty
+}
+
+transaction MergeAsset {
+  --> Product[] product
+}
+transaction PHReading {
+  --> Plot plot
+  o Double ph
+  o DateTime readingTime
+}
+transaction Activity{
+  --> Plot plot
+  o ActivityType activitytype
+  o DateTime time
+}
+event PHThresholdEvent {
+  --> Plot plot
+  o String message
+  o Double phvalue
+  o DateTime readingTime
+}
