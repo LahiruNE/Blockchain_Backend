@@ -25,6 +25,62 @@ rule AdminCanDoAll {
     action: ALLOW
 } 
 
+rule StakeholderCanTansfer {
+    description: "Allow all participants read access to all resources"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.TransferPackage"
+    action: ALLOW
+} 
+
+rule StakeholderCanActivity {
+    description: "Allow all participants read access to all resources"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Activity"
+    action: ALLOW
+} 
+
+rule StakeholderCanDiary {
+    description: "Allow all participants read access to all resources"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Diary"
+    action: ALLOW
+} 
+
+rule StakeholderCanDivideAsset {
+    description: "Allow all participants read access to all resources"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.DivideAsset"
+    action: ALLOW
+} 
+
+rule StakeholderCanInspection {
+    description: "Allow all participants read access to all resources"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.Inspection"
+    action: ALLOW
+} 
+
+rule StakeholderCanMergeAsset {
+    description: "Allow all participants read access to all resources"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.MergeAsset"
+    action: ALLOW
+} 
+
+rule StakeholderCanPHReading {
+    description: "Allow all participants read access to all resources"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
+    operation: ALL
+    resource: "org.ucsc.agriblockchain.PHReading"
+    action: ALLOW
+} 
+
 rule StakeholderCanView{
     description: "Allow all participants read access to all resources"
     participant: "org.ucsc.agriblockchain.Stakeholder"
