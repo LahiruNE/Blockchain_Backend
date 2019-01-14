@@ -106,6 +106,14 @@ rule CertificationCanRead {
     condition: (p.type == "CERTIFICATION" && r.certification.certificationBody.getIdentifier() === p.getIdentifier())
     action: ALLOW
 }
+rule CertificationCanRead1 {
+    description: "Allow all participants read access to all resources"
+    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    operation: READ, UPDATE
+    resource(r): "org.ucsc.agriblockchain.Plot"
+    condition: (p.type == "CERTIFICATION" && r.farm.certification.certificationBody.getIdentifier() === p.getIdentifier())
+    action: ALLOW
+}
 
 rule RetailConditionalRule1 {
     description: "Retail can do product operations"
@@ -127,10 +135,9 @@ rule InvokerHasAccessToInvokedProducts {
 
 rule OwnerHasFullAccessToTheirProducts {
     description: "Allow all participants full access to their assets"
-    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
     operation: ALL
-    resource(r): "org.ucsc.agriblockchain.Product"
-    condition: (r.currentOwner.getIdentifier() === p.getIdentifier())
+    resource: "org.ucsc.agriblockchain.Product"
     action: ALLOW
 }
 
@@ -163,10 +170,9 @@ rule OwnerHasFullAccessToTheirSeeds {
 
 rule OwnerHasFullAccessToTheirPlots {
     description: "Allow all participants full access to their assets"
-    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
     operation: ALL
-    resource(r): "org.ucsc.agriblockchain.Plot"
-    condition: (r.farm.owner.getIdentifier() === p.getIdentifier())
+    resource: "org.ucsc.agriblockchain.Plot"
     action: ALLOW
 }
 
@@ -183,10 +189,9 @@ rule FarmersHasAccessToTheirPlots {
 
 rule OwnerHasFullAccessToTheirFarms {
     description: "Allow all participants full access to their assets"
-    participant(p): "org.ucsc.agriblockchain.Stakeholder"
+    participant: "org.ucsc.agriblockchain.Stakeholder"
     operation: ALL
-    resource(r): "org.ucsc.agriblockchain.Farm"
-    condition: (r.owner.getIdentifier() === p.getIdentifier())
+    resource: "org.ucsc.agriblockchain.Farm"
     action: ALLOW
 }
 
