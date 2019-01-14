@@ -45,6 +45,8 @@ asset Plot identified by plotId {
 asset Farm identified by farmId{
    o String farmId
    o String FarmLocation
+   o String lat optional
+   o String long optional
    o String[] images optional 
    o Directions waterSources
    o Directions nearFactories
@@ -241,6 +243,8 @@ participant Stakeholder identified by stakeholderId{
   o String stakeholderId
   o String name
   o Address address
+  o String lat optional
+  o String long optional
   o String email optional 
   o String telephone optional
   o Certification certification optional 
