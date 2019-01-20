@@ -1,0 +1,29 @@
+{
+  "name": "nodeservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "EC",
+    "Retrieve",
+    "Service"
+  ],
+  "author": "LahiruNE",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "composer-admin": "^0.20.6",
+    "composer-client": "^0.20.6",
+    "express": "^4.16.4",
+    "moment": "^2.23.0",
+    "moment-timezone": "^0.5.23",
+    "superagent": "^3.5.2"
+  }
+}
